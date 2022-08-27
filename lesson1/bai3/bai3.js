@@ -1,10 +1,10 @@
-var arr = [1, 2, 3, 5, 6, 4, 2, 1, 6, 3, 5, 3];
-var count = 1;
-var n = 0;
-var number;
+const arr = [1, 2, 3, 5, 6, 4, 2, 1, 6, 3, 5, 3];
+let count = 1;
+let n = 0;
+let number;
 
-for (var i = 0; i < arr.length; i++) {
-  for (var j = i; j < arr.length; j++) {
+for (let i = 0; i < arr.length; i++) {
+  for (let j = i; j < arr.length; j++) {
     if (arr[i] == arr[j]) {
       n++;
     }
