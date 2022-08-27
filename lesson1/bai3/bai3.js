@@ -1,12 +1,3 @@
-// TODO - In ra số xuất hiện nhiều nhất trong một mảng (ở đây là số 3)
-// TODO - In ra số lân xuất hiện của số đó
-
-// ? - Làm thế nào để nhận biết giống nhau
-// ? - Làm sao để biết số này xuất hiện nhiều lần hơn số còn lại
-
-// * - Lấy được các giá trị
-// * - Lưu giá lặp lại vào một biến
-
 var arr = [1, 2, 3, 5, 6, 4, 2, 1, 6, 3, 5, 3];
 var count = 1;
 var n = 0;
