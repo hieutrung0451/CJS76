@@ -63,9 +63,10 @@ main .search {
 
 main .list {
   margin-top: 26px;
+  padding: 0;
 }
 
-.list .list-item {
+.list li {
   display: flex;
   justify-content: space-between;
   margin: 20px 0;
