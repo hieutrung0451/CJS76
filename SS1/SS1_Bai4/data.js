@@ -12,7 +12,7 @@ let data = [
     phoneNumber: "(864)-309-4841",
   },
   {
-    name: "Alice",
+    name: "Daniel",
     phoneNumber: "(816)-403-5456",
   },
 ];
