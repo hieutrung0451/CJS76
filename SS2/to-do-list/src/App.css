@@ -1,0 +1,54 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f9fafb;
+  color: #686464;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin-right: 250px;
+}
+
+.container {
+  background-color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  width: 200%;
+}
+
+.addTask {
+  background-color: #f9fafb;
+  color: #a9a9a9;
+  border: none;
+  border-bottom: 2px solid #686464;
+  font-size: 24px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.addTask:focus {
+  outline: 0;
+}
+
+.task {
+  display: flex;
+  margin: 10px 0;
+}
+
+.task .taskName {
+  padding-left: 20px;
+}
+
+.task .checkTask:hover {
+  cursor: pointer;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
