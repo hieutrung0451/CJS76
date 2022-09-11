@@ -4,7 +4,7 @@
   object-fit: cover;
 }
 
-.images {
+.container-images {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -14,15 +14,32 @@
 .arrow-left {
   font-size: 50px;
   margin-right: 20px;
-  cursor: pointer;
 }
 
 .arrow-right {
   font-size: 50px;
   margin-left: 20px;
-  cursor: pointer;
 }
 
 .slide {
   border: solid 2px gray;
+}
+
+.container-dots {
+  position: absolute;
+  bottom: 220px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+.dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid #f1f1f1;
+  margin: 0 5px;
+  background: #f1f1f1;
+}
+.dot.active {
+  background: rgb(32, 32, 32);
 }
