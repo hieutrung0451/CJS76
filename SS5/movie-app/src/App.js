@@ -1,6 +1,4 @@
 // ! Hoan thanh phan Edit
-// TODO: Tim kiem duoc index cua phan tu muon sua
-// TODO: In thong tin len hai o input
 // TODO: Tao mot button Edit thi lay duoc thong tin o input va cap nhap vao state
 
 import React, { useState } from "react";
@@ -41,6 +39,7 @@ const App = () => {
     },
   ]);
 
+  const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -52,14 +51,28 @@ const App = () => {
     setDescription(e.target.value);
   };
 
+  const dateTime = () => {
+    let today = new Date();
+    let date =
+      today.getFullYear() +
+      "-" +
+      (today.getMonth() + 1) +
+      "-" +
+      today.getDate();
+    let time =
+      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let dateTime = date + " " + time;
+
+    return dateTime;
+  };
+
   const handleAddNewMovie = () => {
     const newMovie = {
-      // const time = new Date().toString();
       id: Math.floor(Math.random() * 100) + 1,
       title: title,
       description: description,
-      createdAt: "14/9/2022",
-      updatedAt: "14/9/2022",
+      createdAt: dateTime(),
+      updatedAt: dateTime(),
     };
     const dataTemp = [...data];
     dataTemp.push(newMovie);
@@ -71,8 +84,31 @@ const App = () => {
     setData(dataTemp);
   };
 
-  const handleUpdateMovie = (id, title, description) => {
-    console.log(id, title, description);
+  const handleEditMovie = (id, title, description) => {
+    localStorage.setItem("id", id);
+    localStorage.setItem("title", title);
+    localStorage.setItem("description", description);
+    setId(localStorage.getItem("id"));
+    setTitle(localStorage.getItem("title"));
+    setDescription(localStorage.getItem("description"));
+  };
+
+  const handleUpdateMovie = () => {
+    localStorage.setItem("id", id);
+    localStorage.setItem("title", title);
+    localStorage.setItem("description", description);
+
+    const updateMovie = {
+      id: localStorage.getItem("id"),
+      title: localStorage.getItem("title"),
+      description: localStorage.getItem("description"),
+      createdAt: dateTime(),
+      updatedAt: dateTime(),
+    };
+
+    const dataTemp = [...data].filter((e) => e.id !== id);
+    dataTemp.push(updateMovie);
+    setData(dataTemp);
   };
 
   return (
@@ -86,7 +122,12 @@ const App = () => {
         >
           Create
         </Button>
-        <Button color="primary" block="false" className="btn-update">
+        <Button
+          color="primary"
+          block="false"
+          className="btn-update"
+          onClick={handleUpdateMovie}
+        >
           Update
         </Button>
       </Row>
@@ -139,7 +180,7 @@ const App = () => {
                   createdAt={item.createdAt}
                   updatedAt={item.updatedAt}
                   onMovieDelete={handleDeleteMovie}
-                  onMovieEdit={handleUpdateMovie}
+                  onMovieEdit={handleEditMovie}
                 />
               );
             })}
