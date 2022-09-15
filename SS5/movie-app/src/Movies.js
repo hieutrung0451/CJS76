@@ -3,7 +3,11 @@ import { Button } from "reactstrap";
 
 const Movies = (props) => {
   const handleRemoveMovie = () => {
-    props.onMovie(props.id);
+    props.onMovieDelete(props.id);
+  };
+
+  const handleEditMovie = () => {
+    props.onMovieEdit(props.id, props.title, props.description);
   };
 
   return (
@@ -14,7 +18,9 @@ const Movies = (props) => {
       <td>{props.createdAt}</td>
       <td>{props.updatedAt}</td>
       <td>
-        <Button color="primary">Edit</Button>
+        <Button color="primary" onClick={handleEditMovie}>
+          Edit
+        </Button>
         &nbsp;
         <Button color="danger" onClick={handleRemoveMovie}>
           Delete

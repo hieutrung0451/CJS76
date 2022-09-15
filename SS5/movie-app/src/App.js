@@ -71,6 +71,10 @@ const App = () => {
     setData(dataTemp);
   };
 
+  const handleUpdateMovie = (id, title, description) => {
+    console.log(id, title, description);
+  };
+
   return (
     <Container className="container-movie">
       <Row>
@@ -82,6 +86,9 @@ const App = () => {
         >
           Create
         </Button>
+        <Button color="primary" block="false" className="btn-update">
+          Update
+        </Button>
       </Row>
       <Row>
         <FormGroup>
@@ -91,6 +98,7 @@ const App = () => {
             name="title"
             placeholder="Enter your title"
             type="text"
+            value={title}
             onChange={handleChangeTitle}
           />
         </FormGroup>
@@ -101,6 +109,7 @@ const App = () => {
             name="description"
             placeholder="Enter your description"
             type="text"
+            value={description}
             onChange={handleChangeDescription}
           />
         </FormGroup>
@@ -129,7 +138,8 @@ const App = () => {
                   description={item.description}
                   createdAt={item.createdAt}
                   updatedAt={item.updatedAt}
-                  onMovie={handleDeleteMovie}
+                  onMovieDelete={handleDeleteMovie}
+                  onMovieEdit={handleUpdateMovie}
                 />
               );
             })}

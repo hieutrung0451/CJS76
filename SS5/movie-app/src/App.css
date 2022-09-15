@@ -4,3 +4,10 @@ button.btn-create.btn.btn-success.d-block.w-100 {
   padding: 5px;
   margin: 15px;
 }
+
+button.btn-update.btn.btn-primary.d-block.w-100 {
+  width: 150px !important;
+  height: 40px;
+  padding: 5px;
+  margin: 15px 5px;
+}
