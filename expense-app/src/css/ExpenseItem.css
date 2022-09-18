@@ -1,0 +1,48 @@
+.expense-item {
+  position: relative;
+  width: 100%;
+  height: 123px;
+  display: flex;
+  background-color: #575757;
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 10px;
+  line-height: 28px;
+  background-color: #1a1a1a;
+  margin: 7px 0 7px 7px;
+  border-radius: 12px;
+  width: 90px;
+  height: 107px;
+  border: 1px solid #fff;
+}
+
+.date .year {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.date .day {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.title {
+  margin: 46px 10px;
+}
+
+.money {
+  position: absolute;
+  right: 46px;
+  top: 40px;
+  padding: 10px;
+  background-color: #862796;
+  border-radius: 12px;
+  border: 1px solid #fff;
+  font-weight: 500;
+}
