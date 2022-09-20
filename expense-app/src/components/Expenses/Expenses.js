@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-
 import ExpenseItem from "./ExpenseItem";
-import Card from "../Card/Card";
 import ExpensesFilter from "./ExpensesFilter";
 import ExpensesChart from "./ExpensesChart";
 import "./Expenses.css";
@@ -26,20 +24,21 @@ const Expenses = (props) => {
         title={expense.title}
         amount={expense.amount}
         date={expense.date}
+        onDelete={props.delete}
       />
     ));
   }
 
   return (
     <div>
-      <Card className="expenses">
+      <div className="expenses">
         <ExpensesFilter
           selected={filteredYear}
           onChangeFilter={filterChangeHandler}
         />
         <ExpensesChart expenses={filteredExpenses} />
         {expensesContent}
-      </Card>
+      </div>
     </div>
   );
 };

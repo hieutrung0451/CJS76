@@ -5,6 +5,7 @@
   padding: 0.5rem;
   margin: 1rem 0;
   background-color: #4b4b4b;
+  border-radius: 12px;
 }
 
 .expense-item__description {
@@ -33,6 +34,22 @@
   border: 1px solid white;
   padding: 0.5rem;
   border-radius: 12px;
+}
+
+.expense-item .btn-delete {
+  width: 90px;
+  height: 40px;
+  font: inherit;
+  padding: 0.5rem;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  background-color: #890916;
+  color: white;
+  margin-left: 60px;
+}
+
+.expense-item .btn-delete:hover {
+  background-color: #dc3545;
 }
 
 @media (min-width: 580px) {
