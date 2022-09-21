@@ -46,6 +46,7 @@
   background-color: #890916;
   color: white;
   margin-left: 60px;
+  cursor: pointer;
 }
 
 .expense-item .btn-delete:hover {
