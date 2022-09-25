@@ -1,27 +1,26 @@
 import React from "react";
 import { Button } from "reactstrap";
 
-const Movies = (props) => {
+const Movie = (props) => {
   const handleRemoveMovie = () => {
-    props.onMovieDelete(props.id);
+    props.onMovie(props.id);
   };
 
-  const handleEditMovie = () => {
-    props.onMovieEdit(props.id, props.title, props.description);
+  const handleGetID = () => {
+    props.onUpdate(props.id);
   };
 
   return (
     <tr>
-      <td>{props.id}</td>
+      <th scope="row">{props.id}</th>
       <td>{props.title}</td>
       <td>{props.description}</td>
-      <td>{props.createdAt}</td>
-      <td>{props.updatedAt}</td>
+      <td>{props.create}</td>
+      <td>{props.update}</td>
       <td>
-        <Button color="primary" onClick={handleEditMovie}>
+        <Button color="primary" className="mg-btn" onClick={handleGetID}>
           Edit
         </Button>
-        &nbsp;
         <Button color="danger" onClick={handleRemoveMovie}>
           Delete
         </Button>
@@ -30,4 +29,4 @@ const Movies = (props) => {
   );
 };
 
-export default Movies;
+export default Movie;

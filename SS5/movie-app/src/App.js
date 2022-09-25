@@ -1,55 +1,46 @@
-// ! Hoan thanh phan Edit
-// TODO: Tao mot button Edit thi lay duoc thong tin o input va cap nhap vao state
-
 import React, { useState } from "react";
 import {
   Button,
+  Col,
   Container,
+  Form,
+  FormGroup,
+  Input,
+  Label,
   Row,
   Table,
-  FormGroup,
-  Label,
-  Input,
 } from "reactstrap";
 import "./App.css";
-import Movies from "./Movies";
+import Movie from "./Movies";
 
 const App = () => {
-  const [data, setData] = useState([
+  const [listMovie, setListMovie] = useState([
     {
-      id: 8,
-      title: "Avengers Endgame",
+      id: 1,
+      title: "Avenger EndGame",
       description: "2019",
-      createdAt: "2020-09-24 08:46:02",
-      updatedAt: "2020-09-24 08:46:02",
+      createAt: "11-09-2000",
+      updateAt: "11-09-2000",
     },
     {
-      id: 9,
-      title: "Avengers Infinity War",
+      id: 2,
+      title: "Avenger InfinityWar",
       description: "2018",
-      createdAt: "2020-09-24 08:46:22",
-      updatedAt: "2020-09-24 08:46:22",
+      createAt: "11-09-2000",
+      updateAt: "11-09-2000",
     },
     {
-      id: 10,
+      id: 3,
       title: "Batman Bad Blood",
       description: "2016",
-      createdAt: "2020-09-24 08:46:42",
-      updatedAt: "2020-09-24 08:46:42",
+      createAt: "11-09-2000",
+      updateAt: "11-09-2000",
     },
   ]);
 
-  const [id, setId] = useState("");
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
-  const handleChangeTitle = (e) => {
-    setTitle(e.target.value);
-  };
-
-  const handleChangeDescription = (e) => {
-    setDescription(e.target.value);
-  };
+  const [movieUpdate, setMovieUpdate] = useState({});
 
   const dateTime = () => {
     let today = new Date();
@@ -66,103 +57,120 @@ const App = () => {
     return dateTime;
   };
 
+  const handleChangeTitle = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleChangeDescription = (e) => {
+    setDescription(e.target.value);
+  };
+
   const handleAddNewMovie = () => {
     const newMovie = {
       id: Math.floor(Math.random() * 100) + 1,
       title: title,
       description: description,
-      createdAt: dateTime(),
-      updatedAt: dateTime(),
+      createAt: dateTime(),
+      updateAt: dateTime(), 
     };
-    const dataTemp = [...data];
-    dataTemp.push(newMovie);
-    setData(dataTemp);
+    const listMovieTemp = [...listMovie];
+    listMovieTemp.push(newMovie);
+    setListMovie(listMovieTemp);
   };
 
   const handleDeleteMovie = (id) => {
-    const dataTemp = [...data].filter((e) => !(e.id === id));
-    setData(dataTemp);
+    const listMovieTemp = [...listMovie];
+    const movies = listMovieTemp.filter((element) => !(element.id === id));
+    console.log("movies: ", movies);
+    setListMovie(movies);
   };
 
-  const handleEditMovie = (id, title, description) => {
-    localStorage.setItem("id", id);
-    localStorage.setItem("title", title);
-    localStorage.setItem("description", description);
-    setId(localStorage.getItem("id"));
-    setTitle(localStorage.getItem("title"));
-    setDescription(localStorage.getItem("description"));
+  const handleGetDataUpdate = (id) => {
+    const movies = [...listMovie];
+    const index = movies.findIndex((movie) => {
+      return movie.id === id;
+    });
+    setTitle(movies[index].title);
+    setDescription(movies[index].description);
+    setMovieUpdate(movies[index]);
   };
 
   const handleUpdateMovie = () => {
-    localStorage.setItem("id", id);
-    localStorage.setItem("title", title);
-    localStorage.setItem("description", description);
+    const movies = [...listMovie];
+    const index = listMovie.findIndex((movie) => {
+      return movie.id === movieUpdate.id;
+    });
 
-    const updateMovie = {
-      id: localStorage.getItem("id"),
-      title: localStorage.getItem("title"),
-      description: localStorage.getItem("description"),
-      createdAt: dateTime(),
-      updatedAt: dateTime(),
-    };
+    movies[index].title = title;
+    movies[index].description = description;
 
-    const dataTemp = [...data].filter((e) => e.id !== id);
-    dataTemp.push(updateMovie);
-    setData(dataTemp);
+    setListMovie([...movies]);
+    setTitle("");
+    setDescription("");
   };
 
   return (
-    <Container className="container-movie">
+    <Container className="container-crud">
       <Row>
-        <Button
-          color="success"
-          block="false"
-          className="btn-create"
-          onClick={handleAddNewMovie}
-        >
-          Create
-        </Button>
-        <Button
-          color="primary"
-          block="false"
-          className="btn-update"
-          onClick={handleUpdateMovie}
-        >
-          Update
-        </Button>
+        <Col span={4}>
+          <Button
+            color="success"
+            block="false"
+            className="btn-create"
+            onClick={handleAddNewMovie}
+          >
+            Create
+          </Button>
+        </Col>
+        <Col span={4}>
+          {movieUpdate.id ? (
+            <Button
+              color="primary"
+              block="false"
+              className="btn-create"
+              onClick={handleUpdateMovie}
+            >
+              Update
+            </Button>
+          ) : (
+            ""
+          )}
+        </Col>
       </Row>
       <Row>
-        <FormGroup>
-          <Label>Title</Label>
-          <Input
-            id="title"
-            name="title"
-            placeholder="Enter your title"
-            type="text"
-            value={title}
-            onChange={handleChangeTitle}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label>Description</Label>
-          <Input
-            id="description"
-            name="description"
-            placeholder="Enter your description"
-            type="text"
-            value={description}
-            onChange={handleChangeDescription}
-          />
-        </FormGroup>
+        <Form>
+          <FormGroup>
+            <Label>Title</Label>
+            <Input
+              id="title"
+              name="title"
+              placeholder="Enter your title..."
+              type="text"
+              value={title}
+              onChange={handleChangeTitle}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="examplePassword">Description</Label>
+            <Input
+              id="description"
+              name="description"
+              placeholder="Enter your description..."
+              type="text"
+              value={description}
+              onChange={handleChangeDescription}
+            />
+          </FormGroup>
+        </Form>
       </Row>
       <Row>
         <h1>Movie Index</h1>
       </Row>
       <Row>
-        <Table bordered>
+        <Table>
           <thead>
             <tr>
-              <th>ID</th>
+              <th>Id</th>
               <th>Title</th>
               <th>Description</th>
               <th>Created At</th>
@@ -171,17 +179,17 @@ const App = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((item) => {
+            {listMovie.map((item) => {
               return (
-                <Movies
+                <Movie
                   id={item.id}
                   title={item.title}
                   description={item.description}
-                  createdAt={item.createdAt}
-                  updatedAt={item.updatedAt}
-                  onMovieDelete={handleDeleteMovie}
-                  onMovieEdit={handleEditMovie}
-                />
+                  create={item.createAt}
+                  update={item.updateAt}
+                  onMovie={handleDeleteMovie}
+                  onUpdate={handleGetDataUpdate}
+                ></Movie>
               );
             })}
           </tbody>
