@@ -69,7 +69,9 @@ const Content = (props) => {
         </form>
       ) : (
         <div>
-          <h1>Xin chào, {name}</h1>
+          <h1>
+            {props.translation("hello.1")}, {name}
+          </h1>
         </div>
       )}
     </div>

@@ -9,5 +9,9 @@
 
   "LOGIN": {
     "1": "ĐĂNG NHẬP"
+  },
+
+  "hello": {
+    "1": "Xin chào"
   }
 }

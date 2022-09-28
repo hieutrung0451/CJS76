@@ -9,5 +9,9 @@
 
   "LOGIN": {
     "1": "LOGIN"
+  },
+
+  "hello": {
+    "1": "Hello"
   }
 }
