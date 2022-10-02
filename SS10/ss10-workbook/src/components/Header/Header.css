@@ -1,0 +1,21 @@
+.header {
+  width: 100%;
+  height: 46px;
+  background-color: aquamarine;
+}
+
+.header ul {
+  display: flex;
+  justify-content: right;
+  margin: 0;
+  padding: 10px;
+}
+
+ul li {
+  margin-right: 22px;
+  list-style-type: none;
+}
+
+li .link {
+  text-decoration: none;
+}
