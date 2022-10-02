@@ -9,12 +9,14 @@ import InvoiceDetail from "./pages/Invoices/InvoiceDetail";
 import Cart from "./pages/Cart/Cart";
 import Profile from "./pages/Profile/Profile";
 import About from "./pages/About/About";
+import Register from "./components/Register/Register";
 
 const App = () => {
   return (
     <div>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />}>
           <Route path="/home/products" element={<Products />}>
             <Route path=":id" element={<ProductDetail />} />
