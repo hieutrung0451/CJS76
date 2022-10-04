@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Button,
   Col,
@@ -14,48 +14,23 @@ import "./App.css";
 import Movie from "./Movies";
 
 const App = () => {
-  const [listMovie, setListMovie] = useState([
-    {
-      id: 1,
-      title: "Avenger EndGame",
-      description: "2019",
-      createAt: "11-09-2000",
-      updateAt: "11-09-2000",
-    },
-    {
-      id: 2,
-      title: "Avenger InfinityWar",
-      description: "2018",
-      createAt: "11-09-2000",
-      updateAt: "11-09-2000",
-    },
-    {
-      id: 3,
-      title: "Batman Bad Blood",
-      description: "2016",
-      createAt: "11-09-2000",
-      updateAt: "11-09-2000",
-    },
-  ]);
+  const [listMoviesData, setListMoviesData] = useState([]);
+
+  useEffect(() => {
+    fetch("https://633ae6e4471b8c395577e166.mockapi.io/api/v1/movies")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setListMoviesData(data);
+      });
+  }, []);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [movieUpdate, setMovieUpdate] = useState({});
-
-  const dateTime = () => {
-    let today = new Date();
-    let date =
-      today.getFullYear() +
-      "-" +
-      (today.getMonth() + 1) +
-      "-" +
-      today.getDate();
-    let time =
-      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    let dateTime = date + " " + time;
-
-    return dateTime;
-  };
+  const [isCreate, setIsCreate] = useState(true);
 
   const handleChangeTitle = (e) => {
     setTitle(e.target.value);
@@ -67,26 +42,39 @@ const App = () => {
 
   const handleAddNewMovie = () => {
     const newMovie = {
-      id: Math.floor(Math.random() * 100) + 1,
       title: title,
       description: description,
-      createAt: dateTime(),
-      updateAt: dateTime(), 
     };
-    const listMovieTemp = [...listMovie];
-    listMovieTemp.push(newMovie);
-    setListMovie(listMovieTemp);
+
+    fetch("https://633ae6e4471b8c395577e166.mockapi.io/api/v1/movies", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newMovie),
+    })
+      .then(function (res) {
+        return res.json();
+      })
+      .catch(function (data) {
+        setIsCreate(!isCreate);
+      });
+
+    // const listMovieTemp = [...listMoviesData];
+    // listMovieTemp.push(newMovie);
+    // setListMoviesData(listMovieTemp);
   };
 
   const handleDeleteMovie = (id) => {
-    const listMovieTemp = [...listMovie];
+    const listMovieTemp = [...listMoviesData];
     const movies = listMovieTemp.filter((element) => !(element.id === id));
     console.log("movies: ", movies);
-    setListMovie(movies);
+    setListMoviesData(movies);
   };
 
   const handleGetDataUpdate = (id) => {
-    const movies = [...listMovie];
+    const movies = [...listMoviesData];
     const index = movies.findIndex((movie) => {
       return movie.id === id;
     });
@@ -96,15 +84,15 @@ const App = () => {
   };
 
   const handleUpdateMovie = () => {
-    const movies = [...listMovie];
-    const index = listMovie.findIndex((movie) => {
+    const movies = [...listMoviesData];
+    const index = listMoviesData.findIndex((movie) => {
       return movie.id === movieUpdate.id;
     });
 
     movies[index].title = title;
     movies[index].description = description;
 
-    setListMovie([...movies]);
+    setListMoviesData([...movies]);
     setTitle("");
     setDescription("");
   };
@@ -179,14 +167,14 @@ const App = () => {
             </tr>
           </thead>
           <tbody>
-            {listMovie.map((item) => {
+            {listMoviesData.map((item) => {
               return (
                 <Movie
                   id={item.id}
                   title={item.title}
                   description={item.description}
-                  create={item.createAt}
-                  update={item.updateAt}
+                  create={item.createdAt}
+                  update={item.updatedAt}
                   onMovie={handleDeleteMovie}
                   onUpdate={handleGetDataUpdate}
                 ></Movie>
